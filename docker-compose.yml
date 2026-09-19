@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  api-gateway:
+    # 替换为带有 uv 的官方 slim 镜像，体积小、速度极快
+    image: ghcr.io/astral-sh/uv:python3.10-slim
+    container_name: dynamic-api-gateway
+    restart: always
+    ports:
+      - "6699:6699"
+    environment:
+      - ADMIN_TOKEN=${ADMIN_TOKEN:-MyGlobalSuperAdminPassword123}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/app
+      - gateway_data:/app_db_volume
+    working_dir: /app
+    # 容器启动命令：使用 uv sync 同步环境，然后使用 uv run 极速启动
+    command: >
+      bash -c "uv sync --frozen && 
+               export DB_FILE=/app_db_volume/app_data.db && 
+               uv run uvicorn main.py:app --host 127.0.0.1 --port 6699"
+
+volumes:
+  gateway_data:

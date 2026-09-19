@@ -1,0 +1,5 @@
+__pycache__
+__oldhandlers__
+.venv
+uv.lock
+/test

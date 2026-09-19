@@ -1,0 +1,26 @@
+[project]
+name = "my-api-gateway"
+version = "0.1.0"
+description = "Micro Dynamic API Gateway based on FastAPI and SQLite"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Developer", email = "developer@example.com" }
+]
+# 声明生产核心依赖（等同于原 requirements.txt）
+dependencies = [
+    "fastapi==0.111.0",
+    "uvicorn==0.30.1",
+    "pydantic==2.7.4",
+    "asyncio>=4.0.0",
+]
+
+[tool.uv]
+# 显式声明这是一个不需要打包发布（Non-package）的纯纯应用程序项目
+# 这样 uv sync 就不会在本地去寻找 setup.py 或强制构建本项目本身
+managed = true
+package = false
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling"
