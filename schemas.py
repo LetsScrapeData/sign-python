@@ -66,6 +66,7 @@ ErrName = Literal[ "normal", "parasinvalid", "capinvalid", "capexpired", "proxyl
 class ApiScriptInData(BaseModel):
     method: Literal["DELETE", "GET", "POST", "PUT"]
     url: str
+    safe: str
     headers: Optional[Dict[str, str]] = None  # valid if original headers is not undefined
     data: Optional[Any] = None  # valid if original request data is not undefined
     cookies: Optional[str] = None  # valid if script.external includes "cookies"

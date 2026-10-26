@@ -3,3 +3,5 @@ __oldhandlers__
 .venv
 uv.lock
 /test
+.github
+CONTRIBUTING.md
